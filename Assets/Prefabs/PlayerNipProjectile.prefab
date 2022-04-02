@@ -98,14 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  StartVelocity: {x: 34, y: 0}
+  StartVelocity: {x: 24, y: 0}
   Acceleration: {x: 0, y: -48}
   RandomColor: 0
   RandomSpin: 0
   FixedLife: 1
   lifeTime: 0.5
   Active: 0
-  BlowSizeFactor: 12
+  BlowSizeFactor: 16
   BlowTime: 0.5
 --- !u!50 &4071232921135961453
 Rigidbody2D:
