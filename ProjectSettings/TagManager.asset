@@ -3,17 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Background
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerBounds
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - ProjectileBounds
+  - PlayerProjectile
   - 
   - 
   - 
