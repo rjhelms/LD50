@@ -10,17 +10,29 @@ public class PlayerController : MonoBehaviour
     public GameObject toyProjectilePrefab;
     public GameObject nipProjectilePrefab;
 
+    public int DefaultLayer;
+    public int InvulnLayer;
 
+    public float InvulnTime;
+    public float FlashTime;
+
+    public bool Invuln = false;
 
     new Rigidbody2D rigidbody2D;
     Transform projectileParent;
     GameController gameController;
+    SpriteRenderer spriteRenderer;
+
+    float invulnEndTime;
+    float nextFlashTime;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
         projectileParent = GameObject.Find("Projectiles").transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -41,10 +53,47 @@ public class PlayerController : MonoBehaviour
             Instantiate(nipProjectilePrefab, transform.position, Quaternion.identity, projectileParent);
             gameController.Bombs--;
         }
+        if (Invuln)
+        {
+            if (Time.time > nextFlashTime)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                nextFlashTime += FlashTime;
+            }
+            if (Time.time > invulnEndTime)
+            {
+                Invuln = false;
+                spriteRenderer.enabled = true;
+                gameObject.layer = DefaultLayer;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
         rigidbody2D.velocity = Velocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10)   // LiveEnemies
+        {
+            gameController.PlayerHitByCat();
+            invulnEndTime = Time.time + InvulnTime;
+            nextFlashTime = Time.time + FlashTime;
+            spriteRenderer.enabled = false;
+            gameObject.layer = InvulnLayer;
+            Invuln = true;
+        }
+
+        if (collision.gameObject.layer == 13)   // EnemyProjectile
+        {
+            gameController.PlayerHitByProjectile(collision.gameObject.GetComponent<Projectile>().Type);
+            invulnEndTime = Time.time + InvulnTime;
+            nextFlashTime = Time.time + FlashTime;
+            spriteRenderer.enabled = false;
+            gameObject.layer = InvulnLayer;
+            Invuln = true;
+        }
     }
 }

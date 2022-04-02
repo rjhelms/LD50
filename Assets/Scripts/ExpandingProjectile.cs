@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NipProjectile : Projectile
+public class ExpandingProjectile : Projectile
 {
     public float BlowSizeFactor;
     public float BlowTime;
+    public bool StopsOnBlow = true;
 
     private float blowStartTime;
     private float blowEndTime;
+
     private new Collider2D collider2D;
 
     private SpriteRenderer spriteRenderer;
@@ -17,6 +19,7 @@ public class NipProjectile : Projectile
 
     protected override void Start()
     {
+        Debug.Log("In projectile start");
         base.Start();
         collider2D = gameObject.GetComponent<Collider2D>();
         collider2D.enabled = false;
@@ -50,7 +53,10 @@ public class NipProjectile : Projectile
         Active = true;
         blowStartTime = Time.time;
         blowEndTime = blowStartTime + BlowTime;
-        rigidbody2D.velocity = Vector2.zero;
+        if (StopsOnBlow)
+        {
+            rigidbody2D.velocity = Vector2.zero;
+        }
         collider2D.enabled = true;
     }
 }

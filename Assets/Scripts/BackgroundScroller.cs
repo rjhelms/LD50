@@ -15,7 +15,7 @@ public class BackgroundScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += FrameScrollSpeed;
+        transform.position += (FrameScrollSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

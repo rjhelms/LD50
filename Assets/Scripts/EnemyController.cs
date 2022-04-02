@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
     public Transform[] path;
     public int pathIndex;
 
+    public Sprite[] standingSprites;
+    public Sprite[] sleepingSprites;
+
     public float MoveSpeed;
     public Vector2 Velocity;
     public Vector2 DeadVelocity;
@@ -16,6 +19,14 @@ public class EnemyController : MonoBehaviour
 
     public bool Started = false;
     public bool Alive = true;
+
+    public bool DoesMeow;
+
+    public GameObject MeowPrefab;
+    public float meowInterval;
+    public float meowIntervalSpread;
+    public float meowChance;
+
     int pathLength;
 
     new Rigidbody2D rigidbody2D;
@@ -23,6 +34,9 @@ public class EnemyController : MonoBehaviour
     GameController gameController;
     SpriteRenderer spriteRenderer;
     Transform deadEnemiesParent;
+
+    int spriteIdx;
+    float nextMeowTime;
 
     public void BuildPath()
     {
@@ -42,17 +56,45 @@ public class EnemyController : MonoBehaviour
         projectileParent = GameObject.Find("Projectiles").transform;
         deadEnemiesParent = GameObject.Find("DeadEnemies").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteIdx = Random.RandomRange(0, standingSprites.Length);
+        spriteRenderer.sprite = standingSprites[spriteIdx];
+        if (DoesMeow)
+        {
+            SetNextMeowTime();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!Started)
+        {
+            if (DoesMeow)
+            {
+                nextMeowTime += Time.deltaTime;
+            }
             return;
+        }
 
         if (Alive)
         {
             DoMovement();
+            if (DoesMeow & Time.time > nextMeowTime)
+            {
+                SetNextMeowTime();
+                if (Random.value < meowChance)
+                {
+                    Meow();
+                }
+            }
+            if (Velocity.x > 0.1f)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (Velocity.x < -0.1f)
+            {
+                spriteRenderer.flipX = false;
+            }
         } else
         {
             Velocity = Vector2.Lerp(Velocity, DeadVelocity, Time.deltaTime * 5);
@@ -88,6 +130,7 @@ public class EnemyController : MonoBehaviour
         Alive = false;
         gameObject.layer = 11;  // DeadEnemies
         transform.position += new Vector3(0, 0, 5); // move back 5 to put behind other things
+        spriteRenderer.sprite = sleepingSprites[spriteIdx];
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -101,5 +144,19 @@ public class EnemyController : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+    }
+
+    private void SetNextMeowTime()
+    {
+        float thisMeowInterval = meowInterval + Random.Range(-meowIntervalSpread, meowIntervalSpread);
+        nextMeowTime = Time.time + thisMeowInterval;
+    }
+
+    private void Meow()
+    {
+        GameObject newMeow = Instantiate(MeowPrefab, transform.position, Quaternion.identity, projectileParent);
+        Projectile meowProjectile = newMeow.GetComponent<Projectile>();
+        Debug.Log("Setting meow velocity");
+        meowProjectile.StartVelocity = Velocity;
     }
 }

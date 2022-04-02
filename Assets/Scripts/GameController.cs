@@ -26,17 +26,21 @@ public class GameController : MonoBehaviour
     public float toyFireRate;      // fire rate in projectiles/second
     public float toyNextFireTime;  // time to next projectile
 
+    public int CatCollisionCost;
+    public int[] ProjectileCollisionCost;
     public float WaveClearTime;
     public float GetReadyTime;
 
     public float EnemySpawnXStart;
     public float EnemySpawnXStep;
+    public int MaxEnemySpawnIndex = 2;
 
     public float SpawnTarget = 3;
+    public float SpawnGrowthFactor = 1.2f;
 
     public Transform liveEnemiesParent;
     public GameObject[] enemyPrefabs;
-
+        
     private float nextStateTime;
     private bool spawnDone = false;
     private float thisEnemySpawnX;
@@ -79,6 +83,10 @@ public class GameController : MonoBehaviour
             }
             else if (Time.time > nextStateTime)
             {
+                if (MaxEnemySpawnIndex < enemyPrefabs.Length)
+                {
+                    MaxEnemySpawnIndex++;
+                }
                 GetReadyText.enabled = false;
                 gameState = State.WAVE;
                 EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
@@ -86,14 +94,33 @@ public class GameController : MonoBehaviour
                 {
                     e.Started = true;
                 }
-                SpawnTarget++;
+                SpawnTarget = Mathf.CeilToInt(SpawnTarget * SpawnGrowthFactor);
             }
         }
     }
 
+    public void PlayerHitByCat()
+    {
+        ZScore -= CatCollisionCost;
+        if (ZScore <= 0)
+        {
+            ZScore = 0;
+            Debug.Log("GAME OVER!");
+        }
+    }
+
+    public void PlayerHitByProjectile(Projectile.ProjectileType type)
+    {
+        ZScore -= ProjectileCollisionCost[(int)type];
+        if (ZScore <= 0)
+        {
+            ZScore = 0;
+            Debug.Log("GAME OVER!");
+        }
+    }
     private void SpawnEnemy()
     {
-        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        GameObject prefab = enemyPrefabs[Random.Range(0, MaxEnemySpawnIndex)];
         GameObject newEnemy = Instantiate(prefab, new Vector3(thisEnemySpawnX, 0, 0), Quaternion.identity, liveEnemiesParent);
         EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
         enemyController.Started = false;

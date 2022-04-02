@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScrollMoveDistance: {x: 640, y: 0, z: 0}
-  FrameScrollSpeed: {x: -0.1, y: 0, z: 0}
+  FrameScrollSpeed: {x: -4, y: 0, z: 0}
 --- !u!50 &6325113501956514525
 Rigidbody2D:
   serializedVersion: 4
