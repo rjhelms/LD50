@@ -15,9 +15,9 @@ TagManager:
   - Player
   - ProjectileBounds
   - PlayerProjectile
-  - 
-  - 
-  - 
+  - VisibleEditorOnly
+  - LiveEnemies
+  - DeadEnemies
   - 
   - 
   - 
