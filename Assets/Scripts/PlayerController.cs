@@ -10,16 +10,16 @@ public class PlayerController : MonoBehaviour
     public GameObject toyProjectilePrefab;
     public GameObject nipProjectilePrefab;
 
-    public float toyFireRate;      // fire rate in projectiles/second
-    public float toyNextFireTime;  // time to next projectile
+
 
     new Rigidbody2D rigidbody2D;
     Transform projectileParent;
-
+    GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        gameController = FindObjectOfType<GameController>();
         projectileParent = GameObject.Find("Projectiles").transform;
     }
 
@@ -30,10 +30,16 @@ public class PlayerController : MonoBehaviour
         float y_move = Input.GetAxis("Vertical");
         Velocity = new Vector2(x_move, y_move) * MoveSpeed;
 
-        if (Input.GetButton("Fire1") & Time.time > toyNextFireTime)
+        if (Input.GetButton("Fire1") & Time.time > gameController.toyNextFireTime)
         {
-            toyNextFireTime = Time.time + (1 / toyFireRate);
+            gameController.toyNextFireTime = Time.time + (1 / gameController.toyFireRate);
             Instantiate(toyProjectilePrefab, transform.position, Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), projectileParent);
+        }
+
+        if (Input.GetButtonDown("Fire2") & gameController.Bombs > 0)
+        {
+            Instantiate(nipProjectilePrefab, transform.position, Quaternion.identity, projectileParent);
+            gameController.Bombs--;
         }
     }
 

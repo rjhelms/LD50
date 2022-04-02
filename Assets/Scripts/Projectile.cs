@@ -15,7 +15,11 @@ public class Projectile : MonoBehaviour
     public bool RandomColor;
     public bool RandomSpin;
 
+    public bool FixedLife = false;
+    public float lifeTime = 0.5f;
+
     private new Rigidbody2D rigidbody2D;
+    private float lifeEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +37,21 @@ public class Projectile : MonoBehaviour
         {
             rigidbody2D.angularVelocity = Random.Range(-720f, 720f);
         }
+
+        if (FixedLife)
+        {
+            lifeEnd = Time.time + lifeTime;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (FixedLife & Time.time > lifeEnd)
+        {
+            Debug.Log(gameObject + "at end of life");
+            LifeEnd();
+        }
     }
 
     private void FixedUpdate()
@@ -48,11 +61,16 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 7)    // projectile bounds
-                                                // is there a way to look this up by name?
+        if (collision.gameObject.layer == 7 & !FixedLife)   // projectile bounds
+                                                            // is there a way to look this up by name?
         {
             Debug.Log(gameObject + " collided with projectile bounds");
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void LifeEnd()
+    {
+        Destroy(gameObject);
     }
 }
