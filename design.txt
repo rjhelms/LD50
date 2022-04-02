@@ -1,0 +1,23 @@
+LD50 Design Doc
+
+GAME: BREAKFAST TIME IN DREAMLAND
+
+CONCEPT
+- player is dreaming, trying to stay asleep while cats try to wake them up for breakfast
+- top down shooter
+	- or side view - asthetic will be easier
+- flying on a magic carpet in pajamas
+	- various incarnations of flying cats
+
+GAMEPLAY
+- background scrolls right to left to give illusion of movement
+- player has ZZZ meter - game over when it reaches 0
+	- lose ZZZs by getting hit
+		- colliding with cats directly
+		- failing to dodge their meows
+	- regain ZZZs by...
+- defeat cats by distracting them
+	- toys - cat stops to play with them, becomes harmless
+	- catnip - like bomb - distracts all cats on screen?
+
+- spawn in waves - different behaviours
