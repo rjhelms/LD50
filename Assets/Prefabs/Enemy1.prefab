@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6175556502026609765}
   - component: {fileID: 6175556502026609770}
   - component: {fileID: 5414070887291577066}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,9 @@ MonoBehaviour:
   pathIndex: 0
   MoveSpeed: 16
   Velocity: {x: 0, y: 0}
+  DeadVelocity: {x: -8, y: 0}
   PathTargetDistance: 0.25
+  Alive: 1
 --- !u!50 &6175556502026609770
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +125,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &5414070887291577066
 CircleCollider2D:
   m_ObjectHideFlags: 0

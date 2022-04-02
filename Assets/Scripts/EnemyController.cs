@@ -11,13 +11,17 @@ public class EnemyController : MonoBehaviour
 
     public float MoveSpeed;
     public Vector2 Velocity;
+    public Vector2 DeadVelocity;
     public float PathTargetDistance = 0.25f;
 
+    public bool Alive = true;
     int pathLength;
 
     new Rigidbody2D rigidbody2D;
     Transform projectileParent;
     GameController gameController;
+    SpriteRenderer spriteRenderer;
+    Transform deadEnemiesParent;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +36,30 @@ public class EnemyController : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
         projectileParent = GameObject.Find("Projectiles").transform;
+        deadEnemiesParent = GameObject.Find("DeadEnemies").transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (Alive)
+        {
+            DoMovement();
+        } else
+        {
+            Velocity = Vector2.Lerp(Velocity, DeadVelocity, Time.deltaTime * 5);
+            if (!spriteRenderer.isVisible)
+                Destroy(gameObject);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody2D.velocity = Velocity;
+    }
+
+    private void DoMovement()
     {
         // calculate velocity along path
         Velocity = path[pathIndex].position - transform.position;
@@ -50,8 +74,25 @@ public class EnemyController : MonoBehaviour
         Velocity = Velocity.normalized * MoveSpeed;
     }
 
-    private void FixedUpdate()
+    private void Die()
     {
-        rigidbody2D.velocity = Velocity;
+        transform.parent = deadEnemiesParent;
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
+        Alive = false;
+        gameObject.layer = 11;  // DeadEnemies
+        transform.position += new Vector3(0, 0, 5); // move back 5 to put behind other things
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+            Die();
+            if (projectile.Type == Projectile.ProjectileType.TOY)
+            {
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }

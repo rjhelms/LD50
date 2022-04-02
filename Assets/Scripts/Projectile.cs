@@ -17,12 +17,13 @@ public class Projectile : MonoBehaviour
 
     public bool FixedLife = false;
     public float lifeTime = 0.5f;
+    public bool Active = true;
 
-    private new Rigidbody2D rigidbody2D;
+    protected new Rigidbody2D rigidbody2D;
     private float lifeEnd;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = StartVelocity;
@@ -45,7 +46,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (FixedLife & Time.time > lifeEnd)
         {
@@ -56,7 +57,10 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody2D.velocity += Acceleration * Time.fixedDeltaTime;
+        if (!FixedLife | Time.time < lifeEnd)
+        {
+            rigidbody2D.velocity += Acceleration * Time.fixedDeltaTime;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

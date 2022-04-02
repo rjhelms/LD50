@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5612413139386953037}
   - component: {fileID: 332009555960111924}
-  - component: {fileID: 5394582013137483089}
+  - component: {fileID: 7084641136853083625}
   - component: {fileID: 4071232921135961453}
   - component: {fileID: 9033710304379832346}
   m_Layer: 8
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5394582013137483089
+--- !u!114 &7084641136853083625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,16 +94,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2991385377468082281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d100f5f9ebb497d429488c5a626c7819, type: 3}
+  m_Script: {fileID: 11500000, guid: 87afa43ca0496df499cecb87c57d6108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  StartVelocity: {x: 32, y: 8}
+  StartVelocity: {x: 34, y: 0}
   Acceleration: {x: 0, y: -48}
   RandomColor: 0
   RandomSpin: 0
   FixedLife: 1
   lifeTime: 0.5
+  Active: 0
+  BlowSizeFactor: 12
+  BlowTime: 0.5
 --- !u!50 &4071232921135961453
 Rigidbody2D:
   serializedVersion: 4
