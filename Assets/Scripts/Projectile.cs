@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
 
     public Vector2 StartVelocity;  // starting velocity of the object in units/second
     public Vector2 Acceleration;   // acceleration of the projectile, in units/second/second
+    public bool RandomColor;
+    public bool RandomSpin;
 
     private new Rigidbody2D rigidbody2D;
 
@@ -20,12 +22,23 @@ public class Projectile : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = StartVelocity;
+
+        if (RandomColor)
+        {
+            GetComponent<SpriteRenderer>().color = Color.HSVToRGB(
+                Random.value, Random.Range(0.4f, 0.7f), Random.Range(0.5f, 1));
+        }
+
+        if (RandomSpin)
+        {
+            rigidbody2D.angularVelocity = Random.Range(-720f, 720f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
