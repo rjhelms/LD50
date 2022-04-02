@@ -29,10 +29,18 @@ public class GameController : MonoBehaviour
     public float WaveClearTime;
     public float GetReadyTime;
 
+    public float EnemySpawnXStart;
+    public float EnemySpawnXStep;
+
+    public float SpawnTarget = 3;
+
     public Transform liveEnemiesParent;
+    public GameObject[] enemyPrefabs;
 
     private float nextStateTime;
     private bool spawnDone = false;
+    private float thisEnemySpawnX;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -61,19 +69,36 @@ public class GameController : MonoBehaviour
                 nextStateTime = Time.time + GetReadyTime;
                 WaveClearText.enabled = false;
                 GetReadyText.enabled = true;
-                spawnDone = false;
+                thisEnemySpawnX = EnemySpawnXStart;
             }
         } else if (gameState == State.WAVE_CLEAR_READY)
         {
-            // spawn here
-            spawnDone = true;
-
-            if (spawnDone & Time.time > nextStateTime)
+            if (liveEnemiesParent.childCount < SpawnTarget)
+            {
+                SpawnEnemy();
+            }
+            else if (Time.time > nextStateTime)
             {
                 GetReadyText.enabled = false;
                 gameState = State.WAVE;
-                // activate enemies
+                EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
+                foreach (EnemyController e in enemies)
+                {
+                    e.Started = true;
+                }
+                SpawnTarget++;
             }
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        GameObject newEnemy = Instantiate(prefab, new Vector3(thisEnemySpawnX, 0, 0), Quaternion.identity, liveEnemiesParent);
+        EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
+        enemyController.Started = false;
+        enemyController.BuildPath();
+        newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, enemyController.path[0].position.y, newEnemy.transform.position.z);
+        thisEnemySpawnX += EnemySpawnXStep;
     }
 }

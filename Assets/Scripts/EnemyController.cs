@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    public string pathParentName;
     public Transform pathParent;
     public Transform[] path;
     public int pathIndex;
@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public Vector2 DeadVelocity;
     public float PathTargetDistance = 0.25f;
 
+    public bool Started = false;
     public bool Alive = true;
     int pathLength;
 
@@ -23,16 +24,19 @@ public class EnemyController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Transform deadEnemiesParent;
 
-    // Start is called before the first frame update
-    void Start()
+    public void BuildPath()
     {
+        pathParent = GameObject.Find(pathParentName).transform;
         pathLength = pathParent.childCount;
         path = new Transform[pathLength];
         for (int i = 0; i < pathLength; i++)
         {
             path[i] = pathParent.Find(i.ToString());
         }
-
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         rigidbody2D = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
         projectileParent = GameObject.Find("Projectiles").transform;
@@ -43,6 +47,9 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Started)
+            return;
+
         if (Alive)
         {
             DoMovement();
