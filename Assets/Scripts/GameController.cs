@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
     public GameObject[] enemyPrefabs;
         
     private float nextStateTime;
-    private bool spawnDone = false;
     private float thisEnemySpawnX;
     
     // Start is called before the first frame update

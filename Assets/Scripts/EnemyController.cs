@@ -56,7 +56,7 @@ public class EnemyController : MonoBehaviour
         projectileParent = GameObject.Find("Projectiles").transform;
         deadEnemiesParent = GameObject.Find("DeadEnemies").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteIdx = Random.RandomRange(0, standingSprites.Length);
+        spriteIdx = Random.Range(0, standingSprites.Length);
         spriteRenderer.sprite = standingSprites[spriteIdx];
         if (DoesMeow)
         {
@@ -156,7 +156,6 @@ public class EnemyController : MonoBehaviour
     {
         GameObject newMeow = Instantiate(MeowPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile meowProjectile = newMeow.GetComponent<Projectile>();
-        Debug.Log("Setting meow velocity");
         meowProjectile.StartVelocity = Velocity;
     }
 }

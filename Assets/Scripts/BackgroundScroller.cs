@@ -22,7 +22,6 @@ public class BackgroundScroller : MonoBehaviour
     {
         if (collision.tag == "MainCamera")
         {
-            Debug.Log("Scrolling " + gameObject);
             transform.position += ScrollMoveDistance;
         }
     }

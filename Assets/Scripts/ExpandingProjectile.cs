@@ -19,7 +19,6 @@ public class ExpandingProjectile : Projectile
 
     protected override void Start()
     {
-        Debug.Log("In projectile start");
         base.Start();
         collider2D = gameObject.GetComponent<Collider2D>();
         collider2D.enabled = false;
@@ -49,7 +48,6 @@ public class ExpandingProjectile : Projectile
     }
     protected override void LifeEnd()
     {
-        Debug.Log("in NipProjectile life_end");
         Active = true;
         blowStartTime = Time.time;
         blowEndTime = blowStartTime + BlowTime;

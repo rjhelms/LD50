@@ -50,7 +50,6 @@ public class Projectile : MonoBehaviour
     {
         if (FixedLife & Time.time > lifeEnd)
         {
-            Debug.Log(gameObject + "at end of life");
             LifeEnd();
         }
     }
@@ -68,7 +67,6 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.layer == 7 & !FixedLife)   // projectile bounds
                                                             // is there a way to look this up by name?
         {
-            Debug.Log(gameObject + " collided with projectile bounds");
             Destroy(gameObject);
         }
     }
