@@ -80,6 +80,8 @@ public class GameController : MonoBehaviour
     public float CameraShakeDuration;
     public float CameraShakeIntensity;
 
+    public GameObject MusicPlayerPrefab;
+
     private float nextStateTime;
     private float thisEnemySpawnX;
 
@@ -105,6 +107,14 @@ public class GameController : MonoBehaviour
         purrAudioSource = transform.Find("PurrAudio").GetComponent<AudioSource>();
         cameraTransform = GameObject.Find("Main Camera").transform;
         origCameraPosition = cameraTransform.position;
+
+        // instantiate the music player if needed
+        GameObject[] musicPlayers = GameObject.FindGameObjectsWithTag("MusicPlayer");
+        if (musicPlayers.Length == 0)
+        {
+            GameObject musicPlayer = Instantiate(MusicPlayerPrefab, Vector3.zero, Quaternion.identity);
+            DontDestroyOnLoad(musicPlayer);
+        }
     }
 
     // Update is called once per frame
