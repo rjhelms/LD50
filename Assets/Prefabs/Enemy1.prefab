@@ -124,6 +124,7 @@ MonoBehaviour:
   magicInterval: 3
   magicIntervalSpread: 0.5
   magicChance: 0.2
+  magicForcedMiss: 1
 --- !u!50 &6175556502026609770
 Rigidbody2D:
   serializedVersion: 4

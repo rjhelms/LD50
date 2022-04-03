@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     public float magicInterval;
     public float magicIntervalSpread;
     public float magicChance;
-
+    public float magicForcedMiss;
     int pathLength;
 
     new Rigidbody2D rigidbody2D;
@@ -200,9 +200,16 @@ public class EnemyController : MonoBehaviour
         // only cast spell when facing player
         if (spriteRenderer.flipX & playerTransform.position.x < transform.position.x)
             return;
-        if (spriteRenderer.flipY & playerTransform.position.x > transform.position.x)
+        if (!spriteRenderer.flipX & playerTransform.position.x > transform.position.x)
             return;
         Vector2 magicVelocity = playerTransform.position - transform.position;
+        if (Random.value < 0.5f)
+        {
+            magicVelocity += Vector2.up * magicForcedMiss;
+        } else
+        {
+            magicVelocity += Vector2.down * magicForcedMiss;
+        }
         magicVelocity = magicVelocity.normalized * gameController.MagicSpeed;
         GameObject newMagic = Instantiate(MagicPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile magicProjectile = newMagic.GetComponent<Projectile>();
