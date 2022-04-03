@@ -77,8 +77,15 @@ public class GameController : MonoBehaviour
     public float ElapsedTime;
     public float ClockScale;
 
+    public float CameraShakeDuration;
+    public float CameraShakeIntensity;
+
     private float nextStateTime;
     private float thisEnemySpawnX;
+
+    private Vector3 origCameraPosition;
+    private Transform cameraTransform;
+    private float cameraShakeEndTime;
 
     private AudioSource mainAudioSource;
     private AudioSource meowAudioSource;
@@ -96,6 +103,8 @@ public class GameController : MonoBehaviour
         meowAudioSource = transform.Find("MeowAudio").GetComponent<AudioSource>();
         shootAudioSource = transform.Find("ShootAudio").GetComponent<AudioSource>();
         purrAudioSource = transform.Find("PurrAudio").GetComponent<AudioSource>();
+        cameraTransform = GameObject.Find("Main Camera").transform;
+        origCameraPosition = cameraTransform.position;
     }
 
     // Update is called once per frame
@@ -120,6 +129,14 @@ public class GameController : MonoBehaviour
         int hours = Mathf.FloorToInt(scaledTime / 60) + 4;
         int minutes = Mathf.FloorToInt(scaledTime % 60);
         TimeText.text = string.Format("{0:D2}:{1:D2}", hours, minutes);
+
+        if (Time.time < cameraShakeEndTime)
+        {
+            cameraTransform.position = origCameraPosition + (Random.onUnitSphere * CameraShakeIntensity);
+        } else
+        {
+            cameraTransform.position = origCameraPosition;
+        }
 
         switch (gameState)
         {
@@ -227,6 +244,7 @@ public class GameController : MonoBehaviour
         {
             mainAudioSource.PlayOneShot(PlayerHitSound);
         }
+        StartShake();
     }
 
     public void PlayerHitByProjectile(Projectile.ProjectileType type)
@@ -244,6 +262,7 @@ public class GameController : MonoBehaviour
         {
             mainAudioSource.PlayOneShot(PlayerHitSound);
         }
+        StartShake();
     }
 
     public void Lose()
@@ -326,5 +345,10 @@ public class GameController : MonoBehaviour
             return;
         shootAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
         shootAudioSource.Play();
+    }
+
+    public void StartShake()
+    {
+        cameraShakeEndTime = Time.time + CameraShakeDuration;
     }
 }

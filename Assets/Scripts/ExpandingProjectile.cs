@@ -64,6 +64,7 @@ public class ExpandingProjectile : Projectile
         if (Type == ProjectileType.NIP)
         {
             gameController.PlayCatnipBlow();
+            gameController.StartShake();
         }
     }
 }

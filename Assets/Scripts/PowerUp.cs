@@ -15,6 +15,7 @@ public class PowerUp : MonoBehaviour
 
     new Rigidbody2D rigidbody2D;
     GameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
