@@ -40,7 +40,7 @@ TODO 20220402 1150
 	- player fire - done
 	- catnip blow - done
 	
-- music
+- music - done
 
 - flow
 	- level fade in - done
@@ -75,3 +75,21 @@ TODO 20220402 1150
 	- move types / sprites
 	- foreground / background art
 	- screen shake lol - done
+	
+	
+MUSIC;
+D major 6/9
+
+A section:
+
+| D    | A    | D    | A    |
+| D    | G    | D    | A    |
+
+B section:
+
+| G    | D    | G    | D    |
+| G    | D    | A    |      |
+
+AABA AABA
+
+
