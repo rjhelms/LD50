@@ -1418,6 +1418,7 @@ MonoBehaviour:
   - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
   - {fileID: 317385042937784789, guid: 752431de7bcc0744dbc87361ece2b884, type: 3}
   PowerUpChance: 0.2
+  PowerUpChanceWaveScale: 0.9
   PowerUpParent: {fileID: 2077156867}
   EnemySpawnXStart: 22
   EnemySpawnXStep: 2.5
@@ -2180,7 +2181,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -11.25}
+  m_Offset: {x: 0, y: -11.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2191,7 +2192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 40, y: 1}
+  m_Size: {x: 42, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &804343914
 BoxCollider2D:
@@ -2206,7 +2207,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 11.25}
+  m_Offset: {x: 0, y: 11.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2217,7 +2218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 40, y: 1}
+  m_Size: {x: 42, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &804343915
 BoxCollider2D:
@@ -2232,7 +2233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -20, y: 0}
+  m_Offset: {x: -20.5, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2243,7 +2244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 22.5}
+  m_Size: {x: 1, y: 24.5}
   m_EdgeRadius: 0
 --- !u!61 &804343916
 BoxCollider2D:
@@ -2258,7 +2259,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 20, y: 0}
+  m_Offset: {x: 20.5, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2269,7 +2270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 22.5}
+  m_Size: {x: 1, y: 24.5}
   m_EdgeRadius: 0
 --- !u!1 &880122621
 GameObject:
