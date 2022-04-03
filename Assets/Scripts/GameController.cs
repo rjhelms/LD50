@@ -246,7 +246,6 @@ public class GameController : MonoBehaviour
         gameState = State.ENDING;
         coverFadeStartTime = Time.time;
         coverFadeEndTime = Time.time + fadeInOutTime;
-        Debug.Log("GAME OVER");
     }
 
     private void SpawnEnemy()
