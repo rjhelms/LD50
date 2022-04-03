@@ -1453,6 +1453,7 @@ MonoBehaviour:
   ClockScale: 2
   CameraShakeDuration: 0.25
   CameraShakeIntensity: 0.25
+  ScoreManagerPrefab: {fileID: 6767148571397553520, guid: 89c2884be8d9b3045ac7a352a40bb9ba, type: 3}
   MusicPlayerPrefab: {fileID: 8600417496170431112, guid: 945155aaaa43b32479c2539f8c25287e, type: 3}
 --- !u!4 &478014429
 Transform:

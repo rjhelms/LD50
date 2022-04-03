@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 520549502}
   - component: {fileID: 520549503}
   m_Layer: 0
-  m_Name: title_screen
+  m_Name: instruction_screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 01b865c61cf312d4db9e729e84770284, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cd5e79484ea0c645a3f161f89b339f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   FadeCover: {fileID: 1129100286}
   fadeInOutTime: 1
   MusicPlayerPrefab: {fileID: 8600417496170431112, guid: 945155aaaa43b32479c2539f8c25287e, type: 3}
-  NextScene: Instructions
+  NextScene: Main
 --- !u!4 &836121494
 Transform:
   m_ObjectHideFlags: 0

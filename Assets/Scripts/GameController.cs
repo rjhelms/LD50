@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour
     public float CameraShakeDuration;
     public float CameraShakeIntensity;
 
+    public GameObject ScoreManagerPrefab;
     public GameObject MusicPlayerPrefab;
 
     private float nextStateTime;
@@ -96,6 +97,8 @@ public class GameController : MonoBehaviour
 
     private float coverFadeEndTime;
     private float coverFadeStartTime;
+    
+    private ScoreManager scoreManager;
 
     private bool doneFirstUpdate = false;
     // Start is called before the first frame update
@@ -115,12 +118,27 @@ public class GameController : MonoBehaviour
             GameObject musicPlayer = Instantiate(MusicPlayerPrefab, Vector3.zero, Quaternion.identity);
             DontDestroyOnLoad(musicPlayer);
         }
+
+        // instantiate score manager if needed
+        GameObject[] scoreManagers = GameObject.FindGameObjectsWithTag("ScoreManager");
+        if (scoreManagers.Length == 0)
+        {
+            GameObject scoreManagerObject = Instantiate(ScoreManagerPrefab, Vector3.zero, Quaternion.identity);
+            DontDestroyOnLoad(scoreManagerObject);
+            scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
+        } else
+        {
+            scoreManager = scoreManagers[0].GetComponent<ScoreManager>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
             EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
@@ -139,6 +157,7 @@ public class GameController : MonoBehaviour
         int hours = Mathf.FloorToInt(scaledTime / 60) + 4;
         int minutes = Mathf.FloorToInt(scaledTime % 60);
         TimeText.text = string.Format("{0:D2}:{1:D2}", hours, minutes);
+        scoreManager.Time = TimeText.text;
 
         if (Time.time < cameraShakeEndTime)
         {
@@ -153,8 +172,7 @@ public class GameController : MonoBehaviour
             case State.ENDING:
                 if (Time.time > coverFadeEndTime)
                 {
-                    // to be replaced with GameOver when that's ready
-                    SceneManager.LoadSceneAsync("Main");
+                    SceneManager.LoadSceneAsync("GameOver");
                 } else
                 {
                     FadeCover.color = Color.Lerp(Color.clear, Color.black, (Time.time - coverFadeStartTime) / fadeInOutTime);

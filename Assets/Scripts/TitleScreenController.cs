@@ -39,6 +39,11 @@ public class TitleScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+            
         switch (State)
         {
             case CardScreenState.FADE_IN:
