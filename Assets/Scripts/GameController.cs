@@ -61,6 +61,8 @@ public class GameController : MonoBehaviour
     public AudioClip CatnipBlowSound;
     public AudioClip LoseSound;
 
+    public float AudioVariance = 0.1f;
+
     public float ZeroTime;
     public float ElapsedTime;
     public float ClockScale;
@@ -68,12 +70,18 @@ public class GameController : MonoBehaviour
     private float nextStateTime;
     private float thisEnemySpawnX;
 
-    private AudioSource audioSource;
+    private AudioSource mainAudioSource;
+    private AudioSource meowAudioSource;
+    private AudioSource shootAudioSource;
+    private AudioSource purrAudioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = gameObject.GetComponent<AudioSource>();
+        mainAudioSource = gameObject.GetComponent<AudioSource>();
+        meowAudioSource = transform.Find("MeowAudio").GetComponent<AudioSource>();
+        shootAudioSource = transform.Find("ShootAudio").GetComponent<AudioSource>();
+        purrAudioSource = transform.Find("PurrAudio").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -102,7 +110,7 @@ public class GameController : MonoBehaviour
                 gameState = State.WAVE_CLEAR;
                 nextStateTime = Time.time + WaveClearTime;
                 WaveClearText.enabled = true;
-                audioSource.PlayOneShot(WaveClearSound);
+                mainAudioSource.PlayOneShot(WaveClearSound);
             }
         } else if (gameState == State.WAVE_CLEAR)
         {
@@ -153,24 +161,39 @@ public class GameController : MonoBehaviour
     public void PlayerHitByCat()
     {
         ZScore -= CatCollisionCost;
-        audioSource.PlayOneShot(PlayerHitSound);
+        
         if (ZScore <= 0)
         {
             ZScore = 0;
-            Debug.Log("GAME OVER!");
+            Lose();
+        } else
+        {
+            mainAudioSource.PlayOneShot(PlayerHitSound);
         }
     }
 
     public void PlayerHitByProjectile(Projectile.ProjectileType type)
     {
         ZScore -= ProjectileCollisionCost[(int)type];
-        audioSource.PlayOneShot(PlayerHitSound);
+
         if (ZScore <= 0)
         {
             ZScore = 0;
-            Debug.Log("GAME OVER!");
+            Lose();
+        }
+        else
+        {
+            mainAudioSource.PlayOneShot(PlayerHitSound);
         }
     }
+
+    public void Lose()
+    {
+        mainAudioSource.PlayOneShot(LoseSound);
+        Debug.Log("GAME OVER");
+        Time.timeScale = 0f;
+    }
+
     private void SpawnEnemy()
     {
         int spawnIdx = Random.Range(-2, MaxEnemySpawnIndex);
@@ -190,7 +213,7 @@ public class GameController : MonoBehaviour
 
     public void RegisterPowerUp(int _ZScore, int _BScore, float _PScore)
     {
-        audioSource.PlayOneShot(PlayerPowerupSound);
+        mainAudioSource.PlayOneShot(PlayerPowerupSound);
         ZScore += _ZScore;
         if (ZScore > 100)
         {
@@ -202,6 +225,8 @@ public class GameController : MonoBehaviour
 
     public void TrySpawnPowerup(Vector3 position)
     {
+        purrAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
+        purrAudioSource.Play();
         if (Random.value < PowerUpChance)
         {
             int powerUpIdx = Random.Range(0, PowerUpPrefabs.Length);
@@ -211,11 +236,23 @@ public class GameController : MonoBehaviour
 
     public void PlayMeow()
     {
-        audioSource.PlayOneShot(MeowSound);
+        meowAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
+        meowAudioSource.Play();
     }
 
     public void PlayMagic()
     {
-        audioSource.PlayOneShot(MagicSound);
+        mainAudioSource.PlayOneShot(MagicSound);
+    }
+
+    public void PlayCatnipBlow()
+    {
+        mainAudioSource.PlayOneShot(CatnipBlowSound);
+    }
+
+    public void PlayPlayerFire()
+    {
+        shootAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
+        shootAudioSource.Play();
     }
 }

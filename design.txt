@@ -35,10 +35,10 @@ TODO 20220402 1150
 	- player hit - done
 	- player powerup - done
 	- wave clear - done
-	- lose
-	- cat hit
-	- player fire
-	- catnip blow
+	- lose - done
+	- cat hit - done
+	- player fire - done
+	- catnip blow - done
 	
 - music
 
@@ -52,11 +52,17 @@ TODO 20220402 1150
 	- delay in audio time?
 		- tried disabling effects, set latency to best, disabling compression
 		- no improvement
-
+		- likely improvement: dedicated audio sources for time sensitive sounds - meow, hit, powerup?
+	- tighten up keyboard controls
+	
 - configure builds
 
 - balance
-
+	- deactivate meows at X% alpha (10%?)
+	- power up rate decreases per level
+	- less powerups in general
+	- slower growth on toy cannon rate (linear?)
+	
 - extra content
 	- move types / sprites
 	- foreground / background art

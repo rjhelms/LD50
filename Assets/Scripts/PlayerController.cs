@@ -55,12 +55,14 @@ public class PlayerController : MonoBehaviour
         {
             gameController.toyNextFireTime = Time.time + (1 / gameController.toyFireRate);
             Instantiate(toyProjectilePrefab, transform.position, Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), projectileParent);
+            gameController.PlayPlayerFire();
         }
 
         if (Input.GetButtonDown("Fire2") & gameController.Bombs > 0)
         {
             Instantiate(nipProjectilePrefab, transform.position, Quaternion.identity, projectileParent);
             gameController.Bombs--;
+            gameController.PlayPlayerFire();
         }
         if (Invuln)
         {

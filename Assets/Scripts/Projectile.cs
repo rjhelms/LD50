@@ -20,11 +20,13 @@ public class Projectile : MonoBehaviour
     public bool Active = true;
 
     protected new Rigidbody2D rigidbody2D;
+    protected GameController gameController;
     private float lifeEnd;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        gameController = FindObjectOfType<GameController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = StartVelocity;
 

@@ -56,5 +56,9 @@ public class ExpandingProjectile : Projectile
             rigidbody2D.velocity = Vector2.zero;
         }
         collider2D.enabled = true;
+        if (Type == ProjectileType.NIP)
+        {
+            gameController.PlayCatnipBlow();
+        }
     }
 }
