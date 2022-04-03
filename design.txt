@@ -15,9 +15,40 @@ GAMEPLAY
 	- lose ZZZs by getting hit
 		- colliding with cats directly
 		- failing to dodge their meows
-	- regain ZZZs by...
+	- regain ZZZs by collecting powerups
 - defeat cats by distracting them
 	- toys - cat stops to play with them, becomes harmless
 	- catnip - like bomb - distracts all cats on screen?
 
 - spawn in waves - different behaviours
+
+- powerups
+	- C - adds 3 bombs
+	- P - increases fire speed
+	- Z - increases Zs
+	
+	
+TODO 20220402 1150
+- sound
+	- meow
+	- magic
+	- player hit
+	- player powerup
+	- wave clear
+	- lose
+	- cat hit
+	- player fire
+	- catnip blow
+	
+- music
+
+- flow
+	- level fade in / out
+	- game over
+	- title / instruction / game cover screens
+	
+- balance
+
+- extra content
+	- move types / sprites
+	- foreground / background art
