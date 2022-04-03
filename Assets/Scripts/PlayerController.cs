@@ -18,14 +18,20 @@ public class PlayerController : MonoBehaviour
 
     public bool Invuln = false;
 
+    public Sprite[] carpetSprites;
+    public float carpetAnimTime;
+
     new Rigidbody2D rigidbody2D;
     Transform projectileParent;
     GameController gameController;
     SpriteRenderer spriteRenderer;
+    SpriteRenderer carpetSpriteRenderer;
 
     float invulnEndTime;
     float nextFlashTime;
+    float nextCarpetFrame;
 
+    int carpetFrameIdx;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +39,9 @@ public class PlayerController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         projectileParent = GameObject.Find("Projectiles").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        carpetSpriteRenderer = transform.Find("Carpet").GetComponent<SpriteRenderer>();
+        carpetFrameIdx = 0;
+        nextCarpetFrame = Time.time + carpetAnimTime;
     }
 
     // Update is called once per frame
@@ -66,6 +75,14 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.enabled = true;
                 gameObject.layer = DefaultLayer;
             }
+        }
+
+        if (Time.time > nextCarpetFrame)
+        {
+            carpetFrameIdx++;
+            carpetFrameIdx %= carpetSprites.Length;
+            carpetSpriteRenderer.sprite = carpetSprites[carpetFrameIdx];
+            nextCarpetFrame += carpetAnimTime;
         }
     }
 

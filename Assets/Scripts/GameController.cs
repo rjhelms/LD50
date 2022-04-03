@@ -16,10 +16,13 @@ public class GameController : MonoBehaviour
 
     public int ZScore;
     public int Bombs = 3;
+    public int Wave = 1;
 
     public Text BombsText;
     public Text WaveClearText;
     public Text GetReadyText;
+    public Text WaveText;
+
     public Image ZBar;
     public State gameState = State.WAVE;
 
@@ -83,6 +86,8 @@ public class GameController : MonoBehaviour
                 WaveClearText.enabled = false;
                 GetReadyText.enabled = true;
                 thisEnemySpawnX = EnemySpawnXStart;
+                Wave++;
+                WaveText.text = "WAVE " + Wave;
             }
         } else if (gameState == State.WAVE_CLEAR_READY)
         {
