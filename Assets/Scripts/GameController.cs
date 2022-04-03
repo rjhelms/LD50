@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public Text WaveClearText;
     public Text GetReadyText;
     public Text WaveText;
+    public Text TimeText;
 
     public Image ZBar;
     public State gameState = State.WAVE;
@@ -49,7 +50,11 @@ public class GameController : MonoBehaviour
 
     public Transform liveEnemiesParent;
     public GameObject[] enemyPrefabs;
-        
+
+    public float ZeroTime;
+    public float ElapsedTime;
+    public float ClockScale;
+    
     private float nextStateTime;
     private float thisEnemySpawnX;
     
@@ -62,6 +67,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
@@ -72,6 +78,10 @@ public class GameController : MonoBehaviour
         }
         ZBar.rectTransform.sizeDelta = new Vector2(ZScore / 10f, 1);
         BombsText.text = "CATNIP: " + Bombs;
+        float scaledTime = ElapsedTime / ClockScale;
+        int hours = Mathf.FloorToInt(scaledTime / 60) + 4;
+        int minutes = Mathf.FloorToInt(scaledTime % 60);
+        TimeText.text = string.Format("{0:D2}:{1:D2}", hours, minutes);
 
         if (gameState == State.WAVE)
         {
@@ -114,7 +124,17 @@ public class GameController : MonoBehaviour
                 }
                 SpawnTarget = Mathf.CeilToInt(SpawnTarget * SpawnGrowthFactor);
             }
+        } else if (gameState == State.STARTING)
+        {
+            gameState = State.WAVE_CLEAR_READY;
+            nextStateTime = Time.time + GetReadyTime;
+            WaveClearText.enabled = false;
+            GetReadyText.enabled = true;
+            thisEnemySpawnX = EnemySpawnXStart;
+            WaveText.text = "WAVE " + Wave;
+            ZeroTime = Time.time;
         }
+        ElapsedTime = Time.time - ZeroTime;
     }
 
     public void PlayerHitByCat()
