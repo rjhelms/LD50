@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1657422365512227999, guid: f548a534b0766c541ab875f342cc1cc0, type: 3}
       propertyPath: m_Name
-      value: CatMeowLarge
+      value: CatMeowLarge Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6688516599748743455, guid: f548a534b0766c541ab875f342cc1cc0, type: 3}
       propertyPath: BlowSizeFactor

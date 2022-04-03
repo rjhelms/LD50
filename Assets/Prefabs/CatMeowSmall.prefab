@@ -108,6 +108,7 @@ MonoBehaviour:
   BlowSizeFactor: 8
   BlowTime: 0.5
   StopsOnBlow: 0
+  deactivateAlpha: 0.1
 --- !u!50 &503344601554477467
 Rigidbody2D:
   serializedVersion: 4

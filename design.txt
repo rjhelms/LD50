@@ -53,16 +53,17 @@ TODO 20220402 1150
 		- tried disabling effects, set latency to best, disabling compression
 		- no improvement
 		- likely improvement: dedicated audio sources for time sensitive sounds - meow, hit, powerup?
-	- tighten up keyboard controls
+	- tighten up keyboard controls - maybe done?
 	
 - configure builds
 
 - balance
-	- deactivate meows at X% alpha (10%?)
+	- deactivate meows at X% alpha (10%?) - done
 	- power up rate decreases per level
 	- less powerups in general
 	- slower growth on toy cannon rate (linear?)
 	
 - extra content
+	- screen shake lol
 	- move types / sprites
 	- foreground / background art

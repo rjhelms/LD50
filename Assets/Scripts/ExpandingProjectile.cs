@@ -8,6 +8,7 @@ public class ExpandingProjectile : Projectile
     public float BlowTime;
     public bool StopsOnBlow = true;
 
+    public float deactivateAlpha = 0f;
     private float blowStartTime;
     private float blowEndTime;
 
@@ -35,6 +36,10 @@ public class ExpandingProjectile : Projectile
             float lerpFactor = (Time.time - blowStartTime) / BlowTime;
             transform.localScale = Vector2.Lerp(Vector2.one, Vector2.one * BlowSizeFactor, lerpFactor);
             spriteRenderer.color = Color.Lerp(startColor, endColor, lerpFactor);
+            if (spriteRenderer.color.a < deactivateAlpha)
+            {
+                collider2D.enabled = false;
+            }
             if (Time.time > blowEndTime)
             {
                 Destroy(gameObject);
