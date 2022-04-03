@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
 
     public GameObject[] PowerUpPrefabs;
     public float PowerUpChance;
+    public float PowerUpChanceWaveScale = 0.9f;
     public Transform PowerUpParent;
 
     public float EnemySpawnXStart;
@@ -123,6 +124,8 @@ public class GameController : MonoBehaviour
                 thisEnemySpawnX = EnemySpawnXStart;
                 Wave++;
                 WaveText.text = "WAVE " + Wave;
+
+                PowerUpChance *= PowerUpChanceWaveScale;
             }
         } else if (gameState == State.WAVE_CLEAR_READY)
         {

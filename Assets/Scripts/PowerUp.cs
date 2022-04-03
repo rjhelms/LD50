@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour
     public float PValue;
 
     public float YVelocity;
+    public float XVelocity;
 
     new Rigidbody2D rigidbody2D;
     GameController gameController;
@@ -22,7 +23,7 @@ public class PowerUp : MonoBehaviour
         {
             YVelocity = -YVelocity;
         }
-        rigidbody2D.velocity = new Vector2(0, YVelocity);
+        rigidbody2D.velocity = new Vector2(XVelocity, YVelocity);
     }
 
     // Update is called once per frame

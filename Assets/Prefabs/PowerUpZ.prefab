@@ -138,3 +138,4 @@ MonoBehaviour:
   BValue: 0
   PValue: 0
   YVelocity: 4
+  XVelocity: -1

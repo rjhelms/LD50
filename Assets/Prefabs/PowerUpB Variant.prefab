@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7147970679080372482, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
       propertyPath: BValue
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7147970679080372482, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
       propertyPath: PValue
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
       propertyPath: m_Name
-      value: PowerUpB
+      value: PowerUpB Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8043022202383435044, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
       propertyPath: m_Sprite

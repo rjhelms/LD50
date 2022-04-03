@@ -105,9 +105,10 @@ MonoBehaviour:
   FixedLife: 1
   lifeTime: 0.5
   Active: 0
-  BlowSizeFactor: 16
+  BlowSizeFactor: 24
   BlowTime: 0.5
   StopsOnBlow: 1
+  deactivateAlpha: 0
 --- !u!50 &4071232921135961453
 Rigidbody2D:
   serializedVersion: 4
