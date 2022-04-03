@@ -77,6 +77,7 @@ public class EnemyController : MonoBehaviour
         if (DoesMagic)
         {
             magicInterval /= gameController.EnemySpeedRatio;
+            magicForcedMiss /= gameController.EnemySpeedRatio;
             SetNextMagicTime();
         }
     }
