@@ -44,8 +44,8 @@ TODO 20220402 1150
 
 - flow
 	- level fade in - done
-	- level fade out
-	- game over
+	- level fade out - done
+	- game over - done (but needs to go to game over screen)
 	- title / instruction / game cover screens
 
 - fixes

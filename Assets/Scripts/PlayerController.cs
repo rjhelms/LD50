@@ -73,8 +73,15 @@ public class PlayerController : MonoBehaviour
         // short circuit update during fade out
         if (gameController.gameState == GameController.State.ENDING)
         {
+            Collider2D[] colliders = GetComponents<Collider2D>();
+            foreach (Collider2D coll in colliders)
+            {
+                coll.enabled = false;
+            }
+            Velocity +=  Vector2.down * MoveSpeed * 2 * Time.deltaTime;
             return;
         }
+
         float x_move = Input.GetAxis("Horizontal");
         float y_move = Input.GetAxis("Vertical");
         Velocity = new Vector2(x_move, y_move) * MoveSpeed;

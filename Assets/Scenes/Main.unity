@@ -1409,9 +1409,9 @@ MonoBehaviour:
   toyNextFireTime: 0
   CatCollisionCost: 20
   ProjectileCollisionCost: 00000000000000000a00000014000000
-  WaveClearTime: 2
-  GetReadyTime: 1
-  fadeInOutTime: 2
+  WaveClearTime: 1.5
+  GetReadyTime: 0.75
+  fadeInOutTime: 1
   PowerUpPrefabs:
   - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
   - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}

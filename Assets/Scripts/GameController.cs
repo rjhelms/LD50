@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -105,6 +106,10 @@ public class GameController : MonoBehaviour
                 e.Die();
             }
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Lose();
+        }
         ZBar.rectTransform.sizeDelta = new Vector2(ZScore / 10f, 1);
         BombsText.text = "CATNIP: " + Bombs;
         float scaledTime = ElapsedTime / ClockScale;
@@ -115,6 +120,14 @@ public class GameController : MonoBehaviour
         switch (gameState)
         {
             case State.ENDING:
+                if (Time.time > coverFadeEndTime)
+                {
+                    // to be replaced with GameOver when that's ready
+                    SceneManager.LoadSceneAsync("Main");
+                } else
+                {
+                    FadeCover.color = Color.Lerp(Color.clear, Color.black, (Time.time - coverFadeStartTime) / fadeInOutTime);
+                }
                 break;
 
             case State.STARTING:
@@ -126,6 +139,7 @@ public class GameController : MonoBehaviour
                     WaveClearText.enabled = false;
                     GetReadyText.enabled = true;
                     WaveText.text = "WAVE " + Wave;
+                    ZeroTime = Time.time;
                 }
                 else
                 {
@@ -134,7 +148,6 @@ public class GameController : MonoBehaviour
                         gameState = State.WAVE_CLEAR_READY;
                         nextStateTime = Time.time + GetReadyTime;
                         thisEnemySpawnX = EnemySpawnXStart;
-                        ZeroTime = Time.time;
                     } else
                     {
                         FadeCover.color = Color.Lerp(Color.black, Color.clear, (Time.time - coverFadeStartTime) / fadeInOutTime);
@@ -196,6 +209,8 @@ public class GameController : MonoBehaviour
 
     public void PlayerHitByCat()
     {
+        if (gameState == State.ENDING)
+            return;
         ZScore -= CatCollisionCost;
         
         if (ZScore <= 0)
@@ -210,6 +225,8 @@ public class GameController : MonoBehaviour
 
     public void PlayerHitByProjectile(Projectile.ProjectileType type)
     {
+        if (gameState == State.ENDING)
+            return;
         ZScore -= ProjectileCollisionCost[(int)type];
 
         if (ZScore <= 0)
@@ -226,8 +243,10 @@ public class GameController : MonoBehaviour
     public void Lose()
     {
         mainAudioSource.PlayOneShot(LoseSound);
+        gameState = State.ENDING;
+        coverFadeStartTime = Time.time;
+        coverFadeEndTime = Time.time + fadeInOutTime;
         Debug.Log("GAME OVER");
-        Time.timeScale = 0f;
     }
 
     private void SpawnEnemy()
@@ -249,6 +268,8 @@ public class GameController : MonoBehaviour
 
     public void RegisterPowerUp(int _ZScore, int _BScore, float _PScore)
     {
+        if (gameState == State.ENDING)
+            return;
         mainAudioSource.PlayOneShot(PlayerPowerupSound);
         ZScore += _ZScore;
         if (ZScore > 100)
@@ -261,6 +282,8 @@ public class GameController : MonoBehaviour
 
     public void TrySpawnPowerup(Vector3 position)
     {
+        if (gameState == State.ENDING)
+            return;
         purrAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
         purrAudioSource.Play();
         if (Random.value < PowerUpChance)
@@ -272,22 +295,30 @@ public class GameController : MonoBehaviour
 
     public void PlayMeow()
     {
+        if (gameState == State.ENDING)
+            return;
         meowAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
         meowAudioSource.Play();
     }
 
     public void PlayMagic()
     {
+        if (gameState == State.ENDING)
+            return;
         mainAudioSource.PlayOneShot(MagicSound);
     }
 
     public void PlayCatnipBlow()
     {
+        if (gameState == State.ENDING)
+            return;
         mainAudioSource.PlayOneShot(CatnipBlowSound);
     }
 
     public void PlayPlayerFire()
     {
+        if (gameState == State.ENDING)
+            return;
         shootAudioSource.pitch = Random.Range(1 - AudioVariance, 1 + AudioVariance);
         shootAudioSource.Play();
     }
