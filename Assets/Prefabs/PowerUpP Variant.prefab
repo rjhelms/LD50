@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1129826244561930962, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
       propertyPath: PValue
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1129826244561930962, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
       propertyPath: ZValue

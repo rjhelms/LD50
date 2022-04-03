@@ -220,7 +220,7 @@ public class GameController : MonoBehaviour
             ZScore = 100;
         }
         Bombs += _BScore;
-        toyFireRate *= (1 + _PScore);
+        toyFireRate += _PScore;
     }
 
     public void TrySpawnPowerup(Vector3 position)
