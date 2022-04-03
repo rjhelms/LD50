@@ -54,10 +54,11 @@ TODO 20220402 1150
 		- tried disabling effects, set latency to best, disabling compression
 		- no improvement
 		- likely improvement: dedicated audio sources for time sensitive sounds - meow, hit, powerup?
+		- this feels OK now (20220403 15:23)
 	- tighten up keyboard controls - maybe done?
 	- collison weirdness:
-		- player can get hit more than onces from same collision (have a "hit this frame" flag? or check Invuln in collision)
-		- player can pick up powerup more than once - have a "collected" flag
+		- player can get hit more than onces from same collision (have a "hit this frame" flag? or check Invuln in collision) - done
+		- player can pick up powerup more than once - have a "collected" flag - done
 	
 - configure builds
 

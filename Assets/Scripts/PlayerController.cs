@@ -109,6 +109,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // don't process damage if already invulnurable
+        // to prevent mutliple collisions in one frame from all dealing damage
+
+        if (Invuln)
+        {
+            return;
+        }
+
         if (collision.gameObject.layer == 10)   // LiveEnemies
         {
             gameController.PlayerHitByCat();

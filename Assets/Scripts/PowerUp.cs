@@ -11,6 +11,8 @@ public class PowerUp : MonoBehaviour
     public float YVelocity;
     public float XVelocity;
 
+    public bool collected = false;
+
     new Rigidbody2D rigidbody2D;
     GameController gameController;
     // Start is called before the first frame update
@@ -42,9 +44,10 @@ public class PowerUp : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (!collected & collision.gameObject.name == "Player")
         {
             gameController.RegisterPowerUp(ZValue, BValue, PValue);
+            collected = true;
             Destroy(gameObject);
         }
     }
