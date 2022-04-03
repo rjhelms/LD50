@@ -109,7 +109,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fe2bc1affa090ef42884ec9d0aecc2fa, type: 3}
   MoveSpeed: 12
   Velocity: {x: 0, y: 0}
-  DeadVelocity: {x: -8, y: 0}
+  DeadVelocity: {x: -16, y: 0}
   PathTargetDistance: 0.25
   MoveSpeedFudge: 0.1
   Started: 0
