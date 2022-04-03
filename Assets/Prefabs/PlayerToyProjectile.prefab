@@ -98,10 +98,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  StartVelocity: {x: 32, y: 0}
+  StartVelocity: {x: 24, y: 0}
   Acceleration: {x: 0, y: 0}
   RandomColor: 1
   RandomSpin: 1
+  FixedLife: 0
+  lifeTime: 0.5
+  Active: 1
 --- !u!50 &8884265665728387250
 Rigidbody2D:
   serializedVersion: 4

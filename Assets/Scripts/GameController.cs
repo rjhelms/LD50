@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
     public float SpawnTarget = 3;
     public float SpawnGrowthFactor = 1.2f;
 
+    public float MagicSpeed = 24f;
+
     public Transform liveEnemiesParent;
     public GameObject[] enemyPrefabs;
         
@@ -53,6 +55,14 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
+            foreach (EnemyController e in enemies)
+            {
+                e.Die();
+            }
+        }
         ZBar.rectTransform.sizeDelta = new Vector2(ZScore / 10f, 1);
         BombsText.text = "CATNIP: " + Bombs;
 
@@ -119,7 +129,13 @@ public class GameController : MonoBehaviour
     }
     private void SpawnEnemy()
     {
-        GameObject prefab = enemyPrefabs[Random.Range(0, MaxEnemySpawnIndex)];
+        int spawnIdx = Random.Range(-2, MaxEnemySpawnIndex);
+        // jankery to make the first two types more common
+        if (spawnIdx < 0)
+        { 
+            spawnIdx += 2;
+        }
+        GameObject prefab = enemyPrefabs[spawnIdx];
         GameObject newEnemy = Instantiate(prefab, new Vector3(thisEnemySpawnX, 0, 0), Quaternion.identity, liveEnemiesParent);
         EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
         enemyController.Started = false;

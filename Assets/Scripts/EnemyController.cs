@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     public Vector2 DeadVelocity;
     public float PathTargetDistance = 0.25f;
 
+    public float MoveSpeedFudge;
+
     public bool Started = false;
     public bool Alive = true;
 
@@ -26,6 +28,13 @@ public class EnemyController : MonoBehaviour
     public float meowInterval;
     public float meowIntervalSpread;
     public float meowChance;
+
+    public bool DoesMagic;
+
+    public GameObject MagicPrefab;
+    public float magicInterval;
+    public float magicIntervalSpread;
+    public float magicChance;
 
     int pathLength;
 
@@ -37,6 +46,7 @@ public class EnemyController : MonoBehaviour
 
     int spriteIdx;
     float nextMeowTime;
+    float nextMagicTime;
 
     public void BuildPath()
     {
@@ -62,6 +72,10 @@ public class EnemyController : MonoBehaviour
         {
             SetNextMeowTime();
         }
+        if (DoesMagic)
+        {
+            SetNextMagicTime();
+        }
     }
 
     // Update is called once per frame
@@ -72,6 +86,10 @@ public class EnemyController : MonoBehaviour
             if (DoesMeow)
             {
                 nextMeowTime += Time.deltaTime;
+            }
+            if (DoesMagic)
+            {
+                nextMagicTime += Time.deltaTime;
             }
             return;
         }
@@ -85,6 +103,14 @@ public class EnemyController : MonoBehaviour
                 if (Random.value < meowChance)
                 {
                     Meow();
+                }
+            }
+            if (DoesMagic & Time.time > nextMagicTime)
+            {
+                SetNextMagicTime();
+                if (Random.value < magicChance)
+                {
+                    Magic();
                 }
             }
             if (Velocity.x > 0.1f)
@@ -120,10 +146,12 @@ public class EnemyController : MonoBehaviour
             // and recalculate velocity
             Velocity = path[pathIndex].position - transform.position;
         }
-        Velocity = Velocity.normalized * MoveSpeed;
+        float moveVariance = Random.Range(1 - MoveSpeedFudge, 1 + MoveSpeedFudge);
+
+        Velocity = Velocity.normalized * MoveSpeed * moveVariance;
     }
 
-    private void Die()
+    public void Die()
     {
         transform.parent = deadEnemiesParent;
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
@@ -151,11 +179,32 @@ public class EnemyController : MonoBehaviour
         float thisMeowInterval = meowInterval + Random.Range(-meowIntervalSpread, meowIntervalSpread);
         nextMeowTime = Time.time + thisMeowInterval;
     }
+    
+    private void SetNextMagicTime()
+    {
+        float thisMagicInterval = magicInterval + Random.Range(-magicIntervalSpread, magicIntervalSpread);
+        nextMagicTime = Time.time + thisMagicInterval;
+    }
 
     private void Meow()
     {
         GameObject newMeow = Instantiate(MeowPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile meowProjectile = newMeow.GetComponent<Projectile>();
         meowProjectile.StartVelocity = Velocity;
+    }
+
+    private void Magic()
+    {
+        Transform playerTransform = GameObject.Find("Player").transform;
+        // only cast spell when facing player
+        if (spriteRenderer.flipX & playerTransform.position.x < transform.position.x)
+            return;
+        if (spriteRenderer.flipY & playerTransform.position.x > transform.position.x)
+            return;
+        Vector2 magicVelocity = playerTransform.position - transform.position;
+        magicVelocity = magicVelocity.normalized * gameController.MagicSpeed;
+        GameObject newMagic = Instantiate(MagicPrefab, transform.position, Quaternion.identity, projectileParent);
+        Projectile magicProjectile = newMagic.GetComponent<Projectile>();
+        magicProjectile.StartVelocity = magicVelocity;
     }
 }

@@ -115,6 +115,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0}
   DeadVelocity: {x: -8, y: 0}
   PathTargetDistance: 0.25
+  MoveSpeedFudge: 0.08
   Started: 0
   Alive: 1
   DoesMeow: 1
@@ -122,6 +123,11 @@ MonoBehaviour:
   meowInterval: 2
   meowIntervalSpread: 0.4
   meowChance: 0.4
+  DoesMagic: 1
+  MagicPrefab: {fileID: 3494673276640732096, guid: 289a4a2698ef5f747b96ed886bd785ef, type: 3}
+  magicInterval: 2
+  magicIntervalSpread: 0.5
+  magicChance: 0.2
 --- !u!50 &5538042310353305328
 Rigidbody2D:
   serializedVersion: 4

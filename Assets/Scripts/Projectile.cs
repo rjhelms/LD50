@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public enum ProjectileType { TOY, NIP, MEOW };
+    public enum ProjectileType { TOY, NIP, MEOW, MAGIC };
 
     public ProjectileType Type;
 

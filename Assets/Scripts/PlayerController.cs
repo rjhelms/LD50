@@ -94,6 +94,11 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.enabled = false;
             gameObject.layer = InvulnLayer;
             Invuln = true;
+
+            if (collision.gameObject.GetComponent<Projectile>().Type == Projectile.ProjectileType.MAGIC)
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 }
