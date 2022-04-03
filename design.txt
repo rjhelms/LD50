@@ -32,9 +32,9 @@ TODO 20220402 1150
 - sound
 	- meow - done
 	- magic - done
-	- player hit
+	- player hit - done
 	- player powerup - done
-	- wave clear
+	- wave clear - done
 	- lose
 	- cat hit
 	- player fire
@@ -46,7 +46,15 @@ TODO 20220402 1150
 	- level fade in / out
 	- game over
 	- title / instruction / game cover screens
-	
+
+- fixes
+	- disable fire during intervals
+	- delay in audio time?
+		- tried disabling effects, set latency to best, disabling compression
+		- no improvement
+
+- configure builds
+
 - balance
 
 - extra content

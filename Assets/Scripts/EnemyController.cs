@@ -189,6 +189,11 @@ public class EnemyController : MonoBehaviour
 
     private void Meow()
     {
+        // don't do anything if not on screen yet
+        if (!spriteRenderer.isVisible)
+        {
+            return;
+        }
         GameObject newMeow = Instantiate(MeowPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile meowProjectile = newMeow.GetComponent<Projectile>();
         meowProjectile.StartVelocity = Velocity;
@@ -197,6 +202,11 @@ public class EnemyController : MonoBehaviour
 
     private void Magic()
     {
+        // don't do anything if not on screen yet
+        if (!spriteRenderer.isVisible)
+        {
+            return;
+        }
         Transform playerTransform = GameObject.Find("Player").transform;
         // only cast spell when facing player
         if (spriteRenderer.flipX & playerTransform.position.x < transform.position.x)

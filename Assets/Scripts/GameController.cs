@@ -102,6 +102,7 @@ public class GameController : MonoBehaviour
                 gameState = State.WAVE_CLEAR;
                 nextStateTime = Time.time + WaveClearTime;
                 WaveClearText.enabled = true;
+                audioSource.PlayOneShot(WaveClearSound);
             }
         } else if (gameState == State.WAVE_CLEAR)
         {
@@ -152,6 +153,7 @@ public class GameController : MonoBehaviour
     public void PlayerHitByCat()
     {
         ZScore -= CatCollisionCost;
+        audioSource.PlayOneShot(PlayerHitSound);
         if (ZScore <= 0)
         {
             ZScore = 0;
@@ -162,6 +164,7 @@ public class GameController : MonoBehaviour
     public void PlayerHitByProjectile(Projectile.ProjectileType type)
     {
         ZScore -= ProjectileCollisionCost[(int)type];
+        audioSource.PlayOneShot(PlayerHitSound);
         if (ZScore <= 0)
         {
             ZScore = 0;

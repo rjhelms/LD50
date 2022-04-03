@@ -1434,10 +1434,10 @@ MonoBehaviour:
   - {fileID: 6804492952211210464, guid: a2388a56cd5d72340a275e02a2423e32, type: 3}
   MeowSound: {fileID: 8300000, guid: 0ecab60eaec05a44caf723f3161887bf, type: 3}
   MagicSound: {fileID: 8300000, guid: e08b4b1e7672c5b42a2cded60a55fb95, type: 3}
-  PlayerHitSound: {fileID: 0}
+  PlayerHitSound: {fileID: 8300000, guid: 9094bdc20fae2b24cabb7b16516b0947, type: 3}
   CatHitSound: {fileID: 0}
-  PlayerPowerupSound: {fileID: 0}
-  WaveClearSound: {fileID: 0}
+  PlayerPowerupSound: {fileID: 8300000, guid: e54064bcabad9d94c9169a89c77f2a3a, type: 3}
+  WaveClearSound: {fileID: 8300000, guid: 2882d840e10051e4a804e5da85432ddb, type: 3}
   PlayerFireSound: {fileID: 0}
   CatnipBlowSound: {fileID: 0}
   LoseSound: {fileID: 0}
@@ -1482,9 +1482,9 @@ AudioSource:
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassEffects: 1
+  BypassListenerEffects: 1
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
