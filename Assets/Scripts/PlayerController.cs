@@ -47,23 +47,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x_move = Input.GetAxis("Horizontal");
-        float y_move = Input.GetAxis("Vertical");
-        Velocity = new Vector2(x_move, y_move) * MoveSpeed;
-
-        if (Input.GetButton("Fire1") & Time.time > gameController.toyNextFireTime)
+        if (Time.time > nextCarpetFrame)
         {
-            gameController.toyNextFireTime = Time.time + (1 / gameController.toyFireRate);
-            Instantiate(toyProjectilePrefab, transform.position, Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), projectileParent);
-            gameController.PlayPlayerFire();
+            carpetFrameIdx++;
+            carpetFrameIdx %= carpetSprites.Length;
+            carpetSpriteRenderer.sprite = carpetSprites[carpetFrameIdx];
+            nextCarpetFrame += carpetAnimTime;
         }
 
-        if (Input.GetButtonDown("Fire2") & gameController.Bombs > 0)
-        {
-            Instantiate(nipProjectilePrefab, transform.position, Quaternion.identity, projectileParent);
-            gameController.Bombs--;
-            gameController.PlayPlayerFire();
-        }
         if (Invuln)
         {
             if (Time.time > nextFlashTime)
@@ -79,13 +70,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Time.time > nextCarpetFrame)
+        // short circuit update during fade out
+        if (gameController.gameState == GameController.State.ENDING)
         {
-            carpetFrameIdx++;
-            carpetFrameIdx %= carpetSprites.Length;
-            carpetSpriteRenderer.sprite = carpetSprites[carpetFrameIdx];
-            nextCarpetFrame += carpetAnimTime;
+            return;
         }
+        float x_move = Input.GetAxis("Horizontal");
+        float y_move = Input.GetAxis("Vertical");
+        Velocity = new Vector2(x_move, y_move) * MoveSpeed;
+
+        if (Input.GetButton("Fire1") & Time.time > gameController.toyNextFireTime)
+        {
+            gameController.toyNextFireTime = Time.time + (1 / gameController.toyFireRate);
+            Instantiate(toyProjectilePrefab, transform.position, Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), projectileParent);
+            gameController.PlayPlayerFire();
+        }
+
+        if (gameController.gameState == GameController.State.WAVE & Input.GetButtonDown("Fire2") & gameController.Bombs > 0)
+        {
+            Instantiate(nipProjectilePrefab, transform.position, Quaternion.identity, projectileParent);
+            gameController.Bombs--;
+            gameController.PlayPlayerFire();
+        }
+
     }
 
     private void FixedUpdate()

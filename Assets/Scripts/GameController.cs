@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
         WAVE_CLEAR,
         WAVE_CLEAR_READY,
         STARTING,
-        ENDING
+        ENDING,
     };
 
     public int ZScore;
@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public Text TimeText;
 
     public Image ZBar;
+    public Image FadeCover;
+    
     public State gameState = State.WAVE;
 
     public float toyFireRate;      // fire rate in projectiles/second
@@ -34,6 +36,8 @@ public class GameController : MonoBehaviour
     public int[] ProjectileCollisionCost;
     public float WaveClearTime;
     public float GetReadyTime;
+
+    public float fadeInOutTime;
 
     public GameObject[] PowerUpPrefabs;
     public float PowerUpChance;
@@ -76,6 +80,10 @@ public class GameController : MonoBehaviour
     private AudioSource shootAudioSource;
     private AudioSource purrAudioSource;
 
+    private float coverFadeEndTime;
+    private float coverFadeStartTime;
+
+    private bool doneFirstUpdate = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -104,60 +112,85 @@ public class GameController : MonoBehaviour
         int minutes = Mathf.FloorToInt(scaledTime % 60);
         TimeText.text = string.Format("{0:D2}:{1:D2}", hours, minutes);
 
-        if (gameState == State.WAVE)
+        switch (gameState)
         {
-            if (liveEnemiesParent.childCount == 0)
-            {
-                gameState = State.WAVE_CLEAR;
-                nextStateTime = Time.time + WaveClearTime;
-                WaveClearText.enabled = true;
-                mainAudioSource.PlayOneShot(WaveClearSound);
-            }
-        } else if (gameState == State.WAVE_CLEAR)
-        {
-            if (Time.time > nextStateTime)
-            {
-                gameState = State.WAVE_CLEAR_READY;
-                nextStateTime = Time.time + GetReadyTime;
-                WaveClearText.enabled = false;
-                GetReadyText.enabled = true;
-                thisEnemySpawnX = EnemySpawnXStart;
-                Wave++;
-                WaveText.text = "WAVE " + Wave;
+            case State.ENDING:
+                break;
 
-                PowerUpChance *= PowerUpChanceWaveScale;
-            }
-        } else if (gameState == State.WAVE_CLEAR_READY)
-        {
-            if (liveEnemiesParent.childCount < SpawnTarget)
-            {
-                SpawnEnemy();
-            }
-            else if (Time.time > nextStateTime)
-            {
-                if (MaxEnemySpawnIndex < enemyPrefabs.Length)
+            case State.STARTING:
+                if (!doneFirstUpdate)
                 {
-                    MaxEnemySpawnIndex++;
+                    doneFirstUpdate = true;
+                    coverFadeStartTime = Time.time;
+                    coverFadeEndTime = Time.time + fadeInOutTime;
+                    WaveClearText.enabled = false;
+                    GetReadyText.enabled = true;
+                    WaveText.text = "WAVE " + Wave;
                 }
-                GetReadyText.enabled = false;
-                gameState = State.WAVE;
-                EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
-                foreach (EnemyController e in enemies)
+                else
                 {
-                    e.Started = true;
+                    if (Time.time > coverFadeEndTime)
+                    {
+                        gameState = State.WAVE_CLEAR_READY;
+                        nextStateTime = Time.time + GetReadyTime;
+                        thisEnemySpawnX = EnemySpawnXStart;
+                        ZeroTime = Time.time;
+                    } else
+                    {
+                        FadeCover.color = Color.Lerp(Color.black, Color.clear, (Time.time - coverFadeStartTime) / fadeInOutTime);
+                    }
                 }
-                SpawnTarget = Mathf.CeilToInt(SpawnTarget * SpawnGrowthFactor);
-            }
-        } else if (gameState == State.STARTING)
-        {
-            gameState = State.WAVE_CLEAR_READY;
-            nextStateTime = Time.time + GetReadyTime;
-            WaveClearText.enabled = false;
-            GetReadyText.enabled = true;
-            thisEnemySpawnX = EnemySpawnXStart;
-            WaveText.text = "WAVE " + Wave;
-            ZeroTime = Time.time;
+                break;
+
+            case State.WAVE:
+                if (liveEnemiesParent.childCount == 0)
+                {
+                    gameState = State.WAVE_CLEAR;
+                    nextStateTime = Time.time + WaveClearTime;
+                    WaveClearText.enabled = true;
+                    mainAudioSource.PlayOneShot(WaveClearSound);
+                }
+                break;
+
+            case State.WAVE_CLEAR:
+                if (Time.time > nextStateTime)
+                {
+                    gameState = State.WAVE_CLEAR_READY;
+                    nextStateTime = Time.time + GetReadyTime;
+                    WaveClearText.enabled = false;
+                    GetReadyText.enabled = true;
+                    thisEnemySpawnX = EnemySpawnXStart;
+                    Wave++;
+                    WaveText.text = "WAVE " + Wave;
+
+                    PowerUpChance *= PowerUpChanceWaveScale;
+                }
+                break;
+
+            case State.WAVE_CLEAR_READY:
+                if (liveEnemiesParent.childCount < SpawnTarget)
+                {
+                    SpawnEnemy();
+                }
+                else if (Time.time > nextStateTime)
+                {
+                    if (MaxEnemySpawnIndex < enemyPrefabs.Length)
+                    {
+                        MaxEnemySpawnIndex++;
+                    }
+                    GetReadyText.enabled = false;
+                    gameState = State.WAVE;
+                    EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
+                    foreach (EnemyController e in enemies)
+                    {
+                        e.Started = true;
+                    }
+                    SpawnTarget = Mathf.CeilToInt(SpawnTarget * SpawnGrowthFactor);
+                }
+                break;
+
         }
+
         ElapsedTime = Time.time - ZeroTime;
     }
 
