@@ -159,6 +159,7 @@ public class EnemyController : MonoBehaviour
         gameObject.layer = 11;  // DeadEnemies
         transform.position += new Vector3(0, 0, 5); // move back 5 to put behind other things
         spriteRenderer.sprite = sleepingSprites[spriteIdx];
+        gameController.TrySpawnPowerup(transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

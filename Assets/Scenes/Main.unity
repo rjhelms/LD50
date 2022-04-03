@@ -1402,12 +1402,21 @@ MonoBehaviour:
   WaveText: {fileID: 880122623}
   ZBar: {fileID: 1162059750}
   gameState: 0
-  toyFireRate: 4
+  toyFireRate: 3
   toyNextFireTime: 0
   CatCollisionCost: 20
   ProjectileCollisionCost: 00000000000000000a00000014000000
   WaveClearTime: 2
   GetReadyTime: 1
+  PowerUpPrefabs:
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 317385042937784789, guid: 752431de7bcc0744dbc87361ece2b884, type: 3}
+  PowerUpChance: 0.15
+  PowerUpParent: {fileID: 2077156867}
   EnemySpawnXStart: 22
   EnemySpawnXStep: 2.5
   MaxEnemySpawnIndex: 0
@@ -3033,11 +3042,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.25
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 15871
+    m_Bits: 32255
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4599,6 +4608,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2077156866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2077156867}
+  m_Layer: 0
+  m_Name: PowerUps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2077156867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077156866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02922848, y: -0.10870261, z: -0.10872334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086092124
 GameObject:
   m_ObjectHideFlags: 0

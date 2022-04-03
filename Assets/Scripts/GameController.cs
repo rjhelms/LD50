@@ -34,6 +34,10 @@ public class GameController : MonoBehaviour
     public float WaveClearTime;
     public float GetReadyTime;
 
+    public GameObject[] PowerUpPrefabs;
+    public float PowerUpChance;
+    public Transform PowerUpParent;
+
     public float EnemySpawnXStart;
     public float EnemySpawnXStep;
     public int MaxEnemySpawnIndex = 2;
@@ -147,5 +151,25 @@ public class GameController : MonoBehaviour
         enemyController.BuildPath();
         newEnemy.transform.position = new Vector3(newEnemy.transform.position.x, enemyController.path[0].position.y, newEnemy.transform.position.z);
         thisEnemySpawnX += EnemySpawnXStep;
+    }
+
+    public void RegisterPowerUp(int _ZScore, int _BScore, float _PScore)
+    {
+        ZScore += _ZScore;
+        if (ZScore > 100)
+        {
+            ZScore = 100;
+        }
+        Bombs += _BScore;
+        toyFireRate *= (1 + _PScore);
+    }
+
+    public void TrySpawnPowerup(Vector3 position)
+    {
+        if (Random.value < PowerUpChance)
+        {
+            int powerUpIdx = Random.Range(0, PowerUpPrefabs.Length);
+            Instantiate(PowerUpPrefabs[powerUpIdx], position, Quaternion.identity, PowerUpParent);
+        }
     }
 }
