@@ -1429,7 +1429,7 @@ MonoBehaviour:
   SpawnGrowthFactor: 1.1
   MagicSpeed: 18
   EnemySpeedRatio: 1
-  EnemySpeedWaveMult: 1.001
+  EnemySpeedWaveMult: 1.003
   EnemySpeedWaveLin: 0.01
   liveEnemiesParent: {fileID: 64930222}
   enemyPrefabs:
