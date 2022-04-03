@@ -1428,6 +1428,9 @@ MonoBehaviour:
   SpawnTarget: 4
   SpawnGrowthFactor: 1.1
   MagicSpeed: 18
+  EnemySpeedRatio: 1
+  EnemySpeedWaveMult: 1.001
+  EnemySpeedWaveLin: 0.01
   liveEnemiesParent: {fileID: 64930222}
   enemyPrefabs:
   - {fileID: 6175556502026609766, guid: 9a3e1f4d75a010f4c9e99e8e072ca933, type: 3}

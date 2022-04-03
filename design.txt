@@ -55,6 +55,9 @@ TODO 20220402 1150
 		- no improvement
 		- likely improvement: dedicated audio sources for time sensitive sounds - meow, hit, powerup?
 	- tighten up keyboard controls - maybe done?
+	- collison weirdness:
+		- player can get hit more than onces from same collision (have a "hit this frame" flag? or check Invuln in collision)
+		- player can pick up powerup more than once - have a "collected" flag
 	
 - configure builds
 
@@ -65,6 +68,7 @@ TODO 20220402 1150
 	- slower growth on toy cannon rate (linear?) - done
 	- bombs bigger - done
 	- bombs rarer???
+	- speed increases each wave?
 	
 - extra content
 	- move types / sprites

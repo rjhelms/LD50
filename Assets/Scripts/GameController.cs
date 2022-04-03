@@ -54,6 +54,10 @@ public class GameController : MonoBehaviour
 
     public float MagicSpeed = 24f;
 
+    public float EnemySpeedRatio = 1;
+    public float EnemySpeedWaveMult = 1;
+    public float EnemySpeedWaveLin = 0.05f;
+
     public Transform liveEnemiesParent;
     public GameObject[] enemyPrefabs;
 
@@ -177,6 +181,8 @@ public class GameController : MonoBehaviour
                     WaveText.text = "WAVE " + Wave;
 
                     PowerUpChance *= PowerUpChanceWaveScale;
+                    EnemySpeedRatio *= EnemySpeedWaveMult;
+                    EnemySpeedRatio += EnemySpeedWaveLin;
                 }
                 break;
 

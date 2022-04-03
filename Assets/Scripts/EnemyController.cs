@@ -68,12 +68,15 @@ public class EnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteIdx = Random.Range(0, standingSprites.Length);
         spriteRenderer.sprite = standingSprites[spriteIdx];
+        MoveSpeed *= gameController.EnemySpeedRatio;
         if (DoesMeow)
         {
+            meowInterval /= gameController.EnemySpeedRatio;
             SetNextMeowTime();
         }
         if (DoesMagic)
         {
+            magicInterval /= gameController.EnemySpeedRatio;
             SetNextMagicTime();
         }
     }
@@ -221,7 +224,7 @@ public class EnemyController : MonoBehaviour
         {
             magicVelocity += Vector2.down * magicForcedMiss;
         }
-        magicVelocity = magicVelocity.normalized * gameController.MagicSpeed;
+        magicVelocity = magicVelocity.normalized * gameController.MagicSpeed * gameController.EnemySpeedRatio;
         GameObject newMagic = Instantiate(MagicPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile magicProjectile = newMagic.GetComponent<Projectile>();
         magicProjectile.StartVelocity = magicVelocity;
