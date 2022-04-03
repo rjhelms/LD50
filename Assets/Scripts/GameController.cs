@@ -51,17 +51,29 @@ public class GameController : MonoBehaviour
     public Transform liveEnemiesParent;
     public GameObject[] enemyPrefabs;
 
+    public AudioClip MeowSound;
+    public AudioClip MagicSound;
+    public AudioClip PlayerHitSound;
+    public AudioClip CatHitSound;
+    public AudioClip PlayerPowerupSound;
+    public AudioClip WaveClearSound;
+    public AudioClip PlayerFireSound;
+    public AudioClip CatnipBlowSound;
+    public AudioClip LoseSound;
+
     public float ZeroTime;
     public float ElapsedTime;
     public float ClockScale;
-    
+
     private float nextStateTime;
     private float thisEnemySpawnX;
-    
+
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -161,7 +173,7 @@ public class GameController : MonoBehaviour
         int spawnIdx = Random.Range(-2, MaxEnemySpawnIndex);
         // jankery to make the first two types more common
         if (spawnIdx < 0)
-        { 
+        {
             spawnIdx += 2;
         }
         GameObject prefab = enemyPrefabs[spawnIdx];
@@ -175,6 +187,7 @@ public class GameController : MonoBehaviour
 
     public void RegisterPowerUp(int _ZScore, int _BScore, float _PScore)
     {
+        audioSource.PlayOneShot(PlayerPowerupSound);
         ZScore += _ZScore;
         if (ZScore > 100)
         {
@@ -191,5 +204,15 @@ public class GameController : MonoBehaviour
             int powerUpIdx = Random.Range(0, PowerUpPrefabs.Length);
             Instantiate(PowerUpPrefabs[powerUpIdx], position, Quaternion.identity, PowerUpParent);
         }
+    }
+
+    public void PlayMeow()
+    {
+        audioSource.PlayOneShot(MeowSound);
+    }
+
+    public void PlayMagic()
+    {
+        audioSource.PlayOneShot(MagicSound);
     }
 }

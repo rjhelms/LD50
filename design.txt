@@ -30,10 +30,10 @@ GAMEPLAY
 	
 TODO 20220402 1150
 - sound
-	- meow
-	- magic
+	- meow - done
+	- magic - done
 	- player hit
-	- player powerup
+	- player powerup - done
 	- wave clear
 	- lose
 	- cat hit

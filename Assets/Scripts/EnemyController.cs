@@ -192,6 +192,7 @@ public class EnemyController : MonoBehaviour
         GameObject newMeow = Instantiate(MeowPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile meowProjectile = newMeow.GetComponent<Projectile>();
         meowProjectile.StartVelocity = Velocity;
+        gameController.PlayMeow();
     }
 
     private void Magic()
@@ -214,5 +215,6 @@ public class EnemyController : MonoBehaviour
         GameObject newMagic = Instantiate(MagicPrefab, transform.position, Quaternion.identity, projectileParent);
         Projectile magicProjectile = newMagic.GetComponent<Projectile>();
         magicProjectile.StartVelocity = magicVelocity;
+        gameController.PlayMagic();
     }
 }
