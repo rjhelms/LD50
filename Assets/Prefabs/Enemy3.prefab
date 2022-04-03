@@ -121,12 +121,12 @@ MonoBehaviour:
   DoesMeow: 1
   MeowPrefab: {fileID: 7363712489846989440, guid: bdc762899a7689247adfd44d585d628e, type: 3}
   meowInterval: 2
-  meowIntervalSpread: 0.4
+  meowIntervalSpread: 1
   meowChance: 0.4
   DoesMagic: 1
   MagicPrefab: {fileID: 3494673276640732096, guid: 289a4a2698ef5f747b96ed886bd785ef, type: 3}
   magicInterval: 2
-  magicIntervalSpread: 0.5
+  magicIntervalSpread: 1
   magicChance: 0.2
   magicForcedMiss: 2
 --- !u!50 &5538042310353305328

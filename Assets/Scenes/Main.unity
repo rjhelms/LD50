@@ -1563,8 +1563,8 @@ MonoBehaviour:
   - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
   - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
   - {fileID: 317385042937784789, guid: 752431de7bcc0744dbc87361ece2b884, type: 3}
-  PowerUpChance: 0.2
-  PowerUpChanceWaveScale: 0.9
+  PowerUpChance: 0.22
+  PowerUpChanceWaveScale: 0.95
   PowerUpParent: {fileID: 2077156867}
   EnemySpawnXStart: 22
   EnemySpawnXStep: 2.5
@@ -2027,7 +2027,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594688988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17, y: 0, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 97658007}
@@ -6258,7 +6258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113694739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17, y: 0, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1859040042}
