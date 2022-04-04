@@ -1888,8 +1888,16 @@ MonoBehaviour:
   - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
   - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
   - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
+  - {fileID: 419471535904442943, guid: fb1f115ca3d84f4478652f1c425f2474, type: 3}
   - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
   - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 7587721694656170479, guid: 799794823415cdd46b9996064b3aa18d, type: 3}
+  - {fileID: 317385042937784789, guid: 752431de7bcc0744dbc87361ece2b884, type: 3}
   - {fileID: 317385042937784789, guid: 752431de7bcc0744dbc87361ece2b884, type: 3}
   PowerUpChance: 0.22
   PowerUpChanceWaveScale: 0.95
@@ -4040,8 +4048,8 @@ MonoBehaviour:
   nipProjectilePrefab: {fileID: 2991385377468082281, guid: e647b5c9850855342bacc6d4d1e352eb, type: 3}
   DefaultLayer: 6
   InvulnLayer: 12
-  InvulnTime: 3
-  FlashTime: 0.1
+  InvulnTime: 2
+  FlashTime: 0.075
   Invuln: 0
   carpetSprites:
   - {fileID: 1935985929446074354, guid: a1a2b62364b904b40a47c2c83da64a1c, type: 3}
