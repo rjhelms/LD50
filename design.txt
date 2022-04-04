@@ -79,7 +79,7 @@ TODO 20220402 1150
 
 balance notes at 20220403 19:17:
 	- wider variances for attack times - changed
-	- slow down faster enemies?
+	- slow down faster enemies? - changed
 	- path3 and path4 point 5 seems too close - did this not get saved? - changed
 	- be more generous with powerups - feels better
 	
