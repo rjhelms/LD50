@@ -139,18 +139,18 @@ public class GameController : MonoBehaviour
         {
             Application.Quit();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
-            foreach (EnemyController e in enemies)
-            {
-                e.Die();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Lose();
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    EnemyController[] enemies = liveEnemiesParent.GetComponentsInChildren<EnemyController>();
+        //    foreach (EnemyController e in enemies)
+        //    {
+        //        e.Die();
+        //    }
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    Lose();
+        //}
         ZBar.rectTransform.sizeDelta = new Vector2(ZScore / 10f, 1);
         BombsText.text = "CATNIP: " + Bombs;
         float scaledTime = ElapsedTime / ClockScale;
